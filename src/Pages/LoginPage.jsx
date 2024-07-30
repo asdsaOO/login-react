@@ -1,15 +1,22 @@
 import React from "react";
 import { InputComponent } from "../Components/InputComponent";
 import { ButtonComp } from "../Components/ButtonComp";
+import { ImageComp } from "../Components/ImageComp";
+import userImage from "../assets/userImage.jpg"
 import * as Services from "../Services/LoginServices";
+import "../Styles/LoginPage.css"
 
 
 
 function LoginPage (){
   return(
+    <div className="Login-Content">
     <form onSubmit={Services.signIn}>
 
-    <div>
+    
+    <ImageComp
+      image={userImage}
+    />
     <InputComponent
       text="Correo Electronico: "
       name="correo-inp"
@@ -29,8 +36,9 @@ function LoginPage (){
       text="Ingresar"
     />
 
-    </div>
+    
     </form>
+    </div>
 
     
     

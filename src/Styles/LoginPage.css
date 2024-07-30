@@ -1,0 +1,10 @@
+.Login-Content{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70vh;
+  height: 35vh;
+
+}
