@@ -1,0 +1,12 @@
+button img{
+  width: 20px;
+  height: 20px;
+}
+button{
+  width: 15vh;
+  height: 5vh;
+}
+.button-content{
+  display: flex;
+ justify-content: center;
+}
