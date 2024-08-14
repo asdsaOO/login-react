@@ -5,44 +5,59 @@ import { ImageComp } from "../Components/ImageComp";
 import userImage from "../assets/userImage.jpg"
 import * as Services from "../Services/LoginServices";
 import "../Styles/LoginPage.css"
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
-function LoginPage (){
-  return(
-    <div className="Login-Content">
-    <form onSubmit={Services.signIn}>
+  function LoginPage (){
+    const [sendStatus,setSendStatus] = useState(false);
+    const navigate = useNavigate();
 
-    
-    <ImageComp
-      image={userImage}
-    />
-    <InputComponent
-      text="Correo Electronico: "
-      name="correo-inp"
-      id="correo-inp"
-      type="email"
-      placeHolder="Ingrese el correo electronico"
-    />
-    <InputComponent
-      text="Password: "
-      name="password-inp"
-      id="password-inp"
-      type="password"
-      placeHolder="Ingrese su Contraseña"
-    />
-    <ButtonComp
-      type="submit"
-      text="Ingresar"
-    />
+    const sendLoginData=(e)=>{
+      setSendStatus(true);
+      Services.signIn(e)
+      .then((resolve)=>{
+        console.log(resolve);
+        setSendStatus(false);
+        navigate("/Home");
 
-    
-    </form>
-    </div>
+      })
+      .catch((error)=>{
+        console.log("ERROR DESCONOCIDO");
+      })
+    }
 
-    
-    
-  )
 
-}
-export {LoginPage}
+    return(
+      <div className="Login-Content">
+      <form onSubmit={sendLoginData}>
+      <ImageComp
+        image={userImage}
+      />
+      <InputComponent
+        text="Correo Electronico: "
+        name="correo-inp"
+        id="correo-inp"
+        type="email"
+        placeHolder="Ingrese el correo electronico"
+      />
+      <InputComponent
+        text="Password: "
+        name="password-inp"
+        id="password-inp"
+        type="password"
+        placeHolder="Ingrese su Contraseña"
+      />
+      <ButtonComp
+        type="submit"
+        text="Ingresar"
+        loadStatus={sendStatus}
+      />    
+      </form>
+      </div>
+    )
+  }
+
+
+  export {LoginPage}

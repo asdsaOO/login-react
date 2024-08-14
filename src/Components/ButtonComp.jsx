@@ -1,20 +1,22 @@
 import React from "react";
 import "../Styles/ButtonComp.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ButtonComp({type,text, onclick}){
-  const [loadIndicator,setInd] = useState(false);
+function ButtonComp({type,text,onclick,loadStatus}){
+  const [loadIndicator,setInd] = useState(loadStatus);
+  useEffect(()=>{
+    setInd(loadStatus);
 
-
+  },[loadStatus])
+  
   return (
     <div>
       <button type={type} onClick={async()=>{
         if(onclick){
           await onclick();
         }else{
-          console.log("no se asigno un onclick");
+          console.log("el valor es "+loadIndicator);
         }
-        setInd(false);
       }}>
         <div className="button-content">
         {loadIndicator?(<img src="./spinner.svg"></img>):text}
